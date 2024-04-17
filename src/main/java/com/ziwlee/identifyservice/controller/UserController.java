@@ -1,5 +1,6 @@
 package com.ziwlee.identifyservice.controller;
 
+import com.ziwlee.identifyservice.dto.request.ApiResponse;
 import com.ziwlee.identifyservice.dto.request.UserCreationRequest;
 import com.ziwlee.identifyservice.dto.request.UserUpdateRequest;
 import com.ziwlee.identifyservice.entity.User;
@@ -17,8 +18,10 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    User createUser(@RequestBody @Valid UserCreationRequest request){
-       return userService.createUser(request);
+    ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request){
+        ApiResponse<User> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(userService.createUser(request));
+       return apiResponse;
     }
 
     @GetMapping()
